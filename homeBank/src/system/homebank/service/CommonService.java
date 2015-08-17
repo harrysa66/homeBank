@@ -19,6 +19,6 @@ public interface CommonService
   public void updateDatadictData(DataDict model);
   public Integer getWeekSum(Map<String,String> map);
   public Integer getMonthSum(Map<String, String> map);
-  public Map<String,String> getMonthSumByType(String month, int days);
+  public Map<String,String> getMonthSumByType(String month, int days,String paymenttype);
   List<Map<String,String>> getPayincomeData(String stryear, String strmonth, String monday, String sunday);
 }

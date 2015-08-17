@@ -65,4 +65,14 @@ public class BugetServiceImpl implements BugetService
     this.dao.deleteBuget(id);
     
   }
+
+@Override
+public Buget getBugetById(String id) {
+	return this.dao.getBugetById(id);
+}
+
+@Override
+public void updateBuget(Buget model) {
+	this.dao.updateBuget(model);
+}
 }

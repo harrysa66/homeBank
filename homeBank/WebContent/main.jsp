@@ -12,7 +12,18 @@ $(function(){
 		title:'收支表',
         url:'<%=basePath%>/payincome.do',
         border:false,
+        singleSelect:true,
         height:105,
+        onSelect:function(rowIndex, rowData){
+        	var paymenttype = "";
+        	if(rowData.type == "收入"){
+        		paymenttype = "1";
+        	}
+        	if(rowData.type == "支出"){
+        		paymenttype = "2";
+        	}
+        	getMonthSumByType(paymenttype);
+        },
         columns:[[
                   {field:'type',title:'类型',width:250,
                 	  styler: function(value,row,index){
@@ -45,18 +56,28 @@ $(function(){
                               }}
           ]]
     });
-	$.ajax({
-        type: 'POST',   
-        url: '<%=basePath%>/getMonthSumByType.do',
-        data: '',
-        dataType:'text',
-        success: function(msg){
-        	var temp = $.parseJSON(msg); 
-        	createChart('zcqxt','本月支出去向图',eval(temp.data1),'pie',350,390,'元');
-        	createChart('zcqst','本月支出趋势图',eval(temp.data2),'line',360,950,'元');
-        }
-    });
+	getMonthSumByType("2");
 });
+function getMonthSumByType(paymenttype){
+	$.ajax({
+	    type: 'POST',   
+	    url: '<%=basePath%>/getMonthSumByType.do',
+	    data: 'paymenttype='+paymenttype,
+	    dataType:'text',
+	    success: function(msg){
+	    	var temp = $.parseJSON(msg); 
+	    	var title = "";
+	    	if(paymenttype == "1"){
+	    		title = "收入"
+	    	}
+	    	if(paymenttype == "2"){
+	    		title = "支出"
+	    	}
+	    	createChart('zcqxt','本月'+title+'去向图',eval(temp.data1),'pie',350,390,'元');
+	    	createChart('zcqst','本月'+title+'趋势图',eval(temp.data2),'line',360,950,'元');
+	    }
+	});
+}
 </script>
 <div id="layout" class="easyui-layout" data-options="fit:true">
    <div data-options="region:'north',split:true,border:false" style="height:110px">

@@ -60,7 +60,7 @@ function cancel() {
                 <input class="easyui-validatebox" type="text" id="value" name="value" 
                     style="width: 190px;" data-options="required:true">
                 <input class="easyui-combobox" id = "unit" name="unit" 
-                data-options="required:true,
+                data-options="required:true,editable:false,
                     valueField:'code',
                     textField:'codename',
                     width:80,

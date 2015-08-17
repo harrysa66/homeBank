@@ -33,7 +33,14 @@
     <insert id="addBuget" parameterType="Buget" useGeneratedKeys="true">
         insert into buget(month,value,unit) values (#{month},#{value},#{unit})
     </insert>
+    <update id="updateBuget" parameterType="Buget">
+        update buget set month = #{month},value = #{value},unit = #{unit}
+        where id = #{id}
+    </update>
     <delete id="deleteBuget" parameterType="String" >
         delete from  buget where id = #{id}
     </delete>
+    <select id="getBugetById" parameterType="String" resultType="Buget">
+        select * from buget where id = #{id}
+    </select>
 </mapper>

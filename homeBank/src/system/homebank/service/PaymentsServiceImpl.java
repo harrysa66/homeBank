@@ -49,7 +49,7 @@ public class PaymentsServiceImpl implements PaymentsService
   public void addPayments(Payments model)
   {
     model.setCrttime(new Date());
-    model.setDay(model.getDay().replaceAll("-", ""));
+    //model.setDay(model.getDay().replaceAll("-", ""));
     this.dao.addPayments(model);
     
   }

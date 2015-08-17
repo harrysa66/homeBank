@@ -65,7 +65,7 @@ function cancel() {
                 <input class="easyui-validatebox" type="text" id="value" name="value" 
                     style="width: 290px;" data-options="required:true">
                 <input class="easyui-combobox" id = "unit" name="unit" 
-                data-options="required:true,
+                data-options="required:true,editable:false,
                     valueField:'code',
                     textField:'codename',
                     width:80,
@@ -79,7 +79,7 @@ function cancel() {
                 </td>
                 <td>
                 <input class="easyui-combobox" id = "type" name="type" 
-                data-options="required:true,
+                data-options="required:true,editable:false,
                     valueField:'code',
                     textField:'codename',
                     url:'<%=basePath%>/commonController/listDatadictCata.do?catalog=payout'
@@ -92,7 +92,7 @@ function cancel() {
                 </td>
                 <td>
                 <input class="easyui-datebox" id = "day" name="day" 
-                data-options="
+                data-options="editable:false,
                     onSelect: function(date){
                         var y = date.getFullYear();
                         var m = date.getMonth()+1;

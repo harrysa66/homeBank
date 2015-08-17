@@ -15,6 +15,7 @@ import javax.annotation.Resource;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import system.homebank.entity.Menu;
@@ -49,13 +50,13 @@ public class HomePageController
     String smonth = String.valueOf(month);
     if (month < 10)
       smonth = String.format("0%s", month);
-    String strmonth = String.valueOf(year) + smonth;
+    String strmonth = String.valueOf(year)+"-"+ smonth;
     List<Map<String,String>> result = this.commonService.getPayincomeData(stryear,strmonth,monday,sunday);
     return result;
   }
   @RequestMapping("/getMonthSumByType.do")
   @ResponseBody
-  public Object getMonthSumByType()
+  public Object getMonthSumByType(@RequestParam String paymenttype)
   {
     Calendar cal = Calendar.getInstance();
     int year = cal.get(Calendar.YEAR);
@@ -63,10 +64,10 @@ public class HomePageController
     String smonth = String.valueOf(month);
     if (month < 10)
       smonth = String.format("0%s", month);
-    String strmonth = String.valueOf(year) + smonth;
+    String strmonth = String.valueOf(year)+"-"+ smonth;
     
     int days = cal.getActualMaximum(Calendar.DAY_OF_MONTH);
-    Map<String,String> ret = this.commonService.getMonthSumByType(strmonth,days);
+    Map<String,String> ret = this.commonService.getMonthSumByType(strmonth,days,paymenttype);
     return ret;
   }
   // 获得当前日期与本周一相差的天数
@@ -91,7 +92,7 @@ public class HomePageController
     GregorianCalendar currentDate = new GregorianCalendar();
     currentDate.add(GregorianCalendar.DATE, mondayPlus);
     Date monday = currentDate.getTime();
-    DateFormat df = new SimpleDateFormat("yyyyMMdd");
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     String preMonday = df.format(monday);
     return preMonday;
   }
@@ -103,7 +104,7 @@ public class HomePageController
     GregorianCalendar currentDate = new GregorianCalendar();
     currentDate.add(GregorianCalendar.DATE, mondayPlus + 6);
     Date monday = currentDate.getTime();
-    DateFormat df = new SimpleDateFormat("yyyyMMdd");
+    DateFormat df = new SimpleDateFormat("yyyy-MM-dd");
     String preMonday = df.format(monday);
     return preMonday;
   }

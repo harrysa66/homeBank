@@ -59,7 +59,7 @@ function cancel() {
                 <input class="easyui-validatebox" type="text" id="value" name="value" 
                     style="width: 290px;" data-options="required:true">
                 <input class="easyui-combobox" id = "unit" name="unit" 
-                data-options="required:true,
+                data-options="required:true,editable:false,
                     valueField:'code',
                     textField:'codename',
                     width:80,
@@ -73,7 +73,7 @@ function cancel() {
                 </td>
                 <td>
                 <input class="easyui-combobox" id = "type" name="type" 
-                data-options="required:true,
+                data-options="required:true,editable:false,
                     valueField:'code',
                     textField:'codename',
                     url:'<%=basePath%>/commonController/listDatadictCata.do?catalog=income'
@@ -85,7 +85,7 @@ function cancel() {
                 <label>收入日期:</label>
                 </td>
                 <td>
-                <input class="easyui-datebox" id = "day" name="day" />
+                <input class="easyui-datebox" id = "day" name="day" data-options="editable:false"/>
                 </td>
             </tr>
             <tr>

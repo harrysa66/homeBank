@@ -19,6 +19,6 @@ public interface CommonMapper  extends BaseMapper
   public void updateDatadictData(DataDict model);
   public Integer getWeekSum(Map<String,String> map);
   public Integer getMonthSum(Map<String, String> map);
-  public List<Map> getMonthSumByType(String month);
-  public Integer getDayValue(String day);
+  public List<Map> getMonthSumByType(Map<String, Object> map);
+  public Integer getDayValue(Map<String, Object> map);
 }

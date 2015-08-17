@@ -13,7 +13,21 @@ $(function(){
         singleSelect:true,
         columns:[[
             {field:'id',title:'id',hidden:true,width:300},
-            {field:'catalog',title:'类别',width:300},
+            {field:'catalog',title:'类别',width:300,formatter:function(value,row,index){
+            	if(value == 'root'){
+            		return value+'（主类别）';
+            	}else if(value == 'card'){
+            		return value+'（卡类别）';
+            	}else if(value == 'currency'){
+            		return value+'（币种）';
+            	}else if(value == 'income'){
+            		return value+'（收入）';
+            	}else if(value == 'payout'){
+            		return value+'（支出）';
+            	}else{
+            		return value+'（无法识别）';
+            	}
+            }},
             {field:'code',title:'代码',width:300},
             {field:'codename',title:'代码名称',width:300}
         ]],

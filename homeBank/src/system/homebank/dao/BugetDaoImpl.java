@@ -49,4 +49,14 @@ public class BugetDaoImpl implements BugetDao
     this.mapper.deleteBuget(id);
     
   }
+
+@Override
+public Buget getBugetById(String id) {
+	return this.mapper.getBugetById(id);
+}
+
+@Override
+public void updateBuget(Buget model) {
+	this.mapper.updateBuget(model);
+}
 }

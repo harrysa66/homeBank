@@ -17,7 +17,7 @@ function createChart(container,title,yaxisData,chartType,height,width,unit)
         yAxis: {
             min: 0,
             title: {
-            	text: '花费'
+            	text: '金额'
             }
         },
         tooltip: {

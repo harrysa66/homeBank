@@ -68,13 +68,13 @@ public class CommonDaoImpl implements CommonDao
     return this.mapper.getMonthSum(map);
   }
   @Override
-  public List<Map> getMonthSumByType(String month)
+  public List<Map> getMonthSumByType(Map<String, Object> srParam)
   {
-    return this.mapper.getMonthSumByType(month);
+    return this.mapper.getMonthSumByType(srParam);
   }
   @Override
-  public Integer getDayValue(String day)
+  public Integer getDayValue(Map<String, Object> param)
   {
-    return this.mapper.getDayValue(day);
+    return this.mapper.getDayValue(param);
   }
 }

@@ -62,7 +62,7 @@
         select * from payments where id = #{id}
     </select>
     <update id="updatePayments" parameterType="Payments">
-        update payments set name = #{name},value = #{value},unit = #{unit},type = #{type},descript = #{descript}
+        update payments set name = #{name},value = #{value},unit = #{unit},type = #{type},day = #{day},descript = #{descript}
         where id = #{id}
     </update>
 </mapper>

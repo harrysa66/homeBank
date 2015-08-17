@@ -48,7 +48,7 @@ function cancel() {
                 </td>
                 <td>
                 <input class="easyui-combobox" id = "catalog" name="catalog" 
-		        data-options="required:true,
+		        data-options="required:true,editable:false,
 		            valueField:'code',
                     textField:'codename',
 		            url:'<%=basePath%>/commonController/listDatadictCata.do?catalog=root'

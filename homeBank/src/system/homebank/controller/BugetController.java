@@ -6,12 +6,12 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import system.homebank.entity.Buget;
-import system.homebank.entity.DataDict;
 import system.homebank.service.BugetService;
 import system.homebank.service.CommonService;
 
@@ -53,6 +53,23 @@ public class BugetController
     Map<String,String> map = new HashMap<String,String>();
     map.put("success", "true");
     map.put("msg", "添加成功！");
+    return map;
+  }
+  @RequestMapping("/preUpdateBuget.do")
+  public Object preUpdateBuget(@RequestParam String id,Model model)
+  {
+	Buget buget = this.service.getBugetById(id);
+    model.addAttribute("entity", buget);
+    return "/preupdatebuget";
+  }
+  @RequestMapping("/updateBuget.do")
+  @ResponseBody
+  public Object updateBuget(Buget model)
+  {
+    this.service.updateBuget(model);
+    Map<String,String> map = new HashMap<String,String>();
+    map.put("success", "true");
+    map.put("msg", "修改成功！");
     return map;
   }
   @RequestMapping("/deleteBuget.do")

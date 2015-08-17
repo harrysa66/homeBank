@@ -14,4 +14,8 @@ public interface BugetService
   public void addBuget(Buget model);
 
   public void deleteBuget(String id);
+
+public Buget getBugetById(String id);
+
+public void updateBuget(Buget model);
 }

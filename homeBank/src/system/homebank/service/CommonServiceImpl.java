@@ -71,10 +71,13 @@ public class CommonServiceImpl implements CommonService
     return this.dao.getMonthSum(map);
   }
   @Override
-  public Map<String, String> getMonthSumByType(String month,int days)
+  public Map<String, String> getMonthSumByType(String month,int days,String paymenttype)
   {
     Map<String,String> retmap = new HashMap<String,String>();
-    List<Map> list = this.dao.getMonthSumByType(month + "%");
+    Map<String, Object> srParam = new HashMap<String, Object>();
+    srParam.put("month", month + "%");
+    srParam.put("paymenttype", paymenttype);
+    List<Map> list = this.dao.getMonthSumByType(srParam);
     String data = "[{name:'花费',data:[";
     for (Map m:list)
     {
@@ -89,12 +92,16 @@ public class CommonServiceImpl implements CommonService
     retmap.put("data1", data);
     
     data = "[{name:'日期',data:[";
-    String beginday = month + "01";
+    String beginday = month.replaceAll("-", "") + "01";
     int ibeginday = Integer.parseInt(beginday);
     for (int i = 0; i < days; i++)
     {
       String temp = String.valueOf(ibeginday + i);
-      Integer value = this.dao.getDayValue(temp);
+      String day = temp.substring(0, 4)+"-"+temp.substring(4, 6)+"-"+temp.substring(6, 8);
+      Map<String, Object> param = new HashMap<String, Object>();
+      param.put("day", day);
+      param.put("paymenttype", paymenttype);
+      Integer value = this.dao.getDayValue(param);
       data += String.format("['%d号',", Integer.parseInt(temp.substring(6)));
       data += String.format("%s],", value == null?"0":value.toString());
     }

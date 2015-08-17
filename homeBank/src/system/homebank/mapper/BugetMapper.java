@@ -17,5 +17,9 @@ public interface BugetMapper extends BaseMapper
 
   public void addBuget(Buget model);
 
-  public void deleteBuget(String id); 
+  public void deleteBuget(String id);
+
+public Buget getBugetById(String id);
+
+public void updateBuget(Buget model); 
 }

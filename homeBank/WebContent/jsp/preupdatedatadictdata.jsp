@@ -49,11 +49,10 @@ function cancel() {
                 </td>
                 <td>
                 <input class="easyui-combobox" id = "catalog" name="catalog" 
-		        data-options="required:true,
+		        data-options="required:true,editable:false,
 		            valueField:'code',
                     textField:'codename',
                     editable:false,
-                    readonly:true,
 		            url:'<%=basePath%>/commonController/listDatadictCata.do?catalog=root',
 		            onLoadSuccess:function(){
 		              $('#catalog').combobox('setValue','${entity.catalog}');
