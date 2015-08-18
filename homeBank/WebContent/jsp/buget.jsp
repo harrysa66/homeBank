@@ -35,7 +35,6 @@ $(function(){
             text:'编辑',
             iconCls: 'icon-edit',
             handler: function(){
-            	debugger;
             	var select = $('#datagrid_buget').datagrid('getSelected');
                 if (select == null){
                     $.messager.alert("Info","请选择记录！","Info");
