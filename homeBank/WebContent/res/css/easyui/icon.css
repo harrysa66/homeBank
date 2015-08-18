@@ -62,3 +62,43 @@
 .icon-mini-refresh{
 	background:url('icons/mini_refresh.png') no-repeat center center;
 }
+
+.icon-run{
+	background:url('icons/edit_run.png') no-repeat center center;
+}
+.icon-data{
+	background:url('icons/data_info.png') no-repeat center center;
+}
+.icon-searchfile{
+	background:url('icons/search_file.png') no-repeat center center;
+}
+.icon-setting{
+	background:url('icons/setting.png') no-repeat center center;
+}
+.icon-reset{
+	background:url('icons/reset.png') no-repeat center center;
+}
+.icon-clear{
+	background:url('icons/clear.png') no-repeat center center;
+}
+.icon-upload{
+	background:url('icons/upload.png') no-repeat center center;
+}
+.icon-user-remove{
+	background:url('icons/user_remove.png') no-repeat center center;
+}
+.icon-user-refresh{
+	background:url('icons/user_refresh.png') no-repeat center center;
+}
+.icon-save-as{
+	background:url('icons/save_as.png') no-repeat center center;
+}
+.icon-group{
+	background:url('icons/group.png') no-repeat center center;
+}
+.icon-close{
+	background:url('icons/close.png') no-repeat center center;
+}
+.icon-menu{
+	background:url('icons/menu.png') no-repeat center center;
+}

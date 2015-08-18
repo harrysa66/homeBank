@@ -127,6 +127,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('6f60af2d074141ccb4e835906fdefe66', 'admin', '4392c4f26c8de6034f758c61331d6e60', '超级管理员', '2015-07-27 14:08:12', null, 'DEFAULT', 'Y');
 
 -- ----------------------------
 -- View structure for vbuget

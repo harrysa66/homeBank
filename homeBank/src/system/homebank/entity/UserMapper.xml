@@ -1,0 +1,145 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.homebank.mapper.UserMapper" >
+<resultMap id="userResultMap" type="User" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="nickname" property="nickname" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="isValid" property="isvalid" jdbcType="VARCHAR" />
+  </resultMap>
+
+    <select id="findUserByUsername" parameterType="String" resultType="User">
+        select * from user where username = #{username}
+    </select>
+    
+    <!-- 用户插入 -->
+	<insert id="insert" parameterType="User">
+		INSERT INTO user
+		  (ID,
+		   USERNAME,
+		   NICKNAME,
+		   PASSWORD
+		   <if  test="createTime !=null and createTime != ''">
+		   ,CREATE_TIME
+		   </if>
+		   <if  test="modifyTime !=null and modifyTime != ''">
+		   ,MODIFY_TIME
+		   </if>
+		   <if  test="status !=null and status != ''">
+		   ,STATUS
+		   </if>
+		   <if  test="isvalid!=null and isvalid!= ''">
+		   ,ISVALID
+		   </if>
+		   )
+		VALUES
+		  (#{id},
+		   #{username},
+		   #{nickname},
+		   #{password}
+		   <if  test="createTime !=null and createTime != ''">
+		  ,#{createTime}
+		   </if>
+		   <if  test="modifyTime !=null and modifyTime != ''">
+		   ,#{modifyTime}
+		   </if>
+		   <if  test="status !=null and status != ''">
+		  ,#{status}
+		   </if>
+		   <if  test="isvalid !=null and isvalid != ''">
+		  ,#{isvalid}
+		   </if>
+		   )
+	</insert>
+	<!-- 用户更新 -->
+	<update id="update" parameterType="User">
+	
+			update user
+			
+			<set>  
+		        <if test="nickname!= null">  
+		           NICKNAME= #{nickname},  
+		        </if>  
+		        <if test="modifyTime!= null">  
+		         MODIFY_TIME = #{modifyTime},
+		        </if>
+		        <if test="isvalid!= null">  
+		         ISVALID = #{isvalid},
+		        </if>
+		        <if test="status!= null">  
+		         STATUS = #{status}
+		        </if>
+		    </set>  	
+		 WHERE ID = #{id}
+	</update>
+    
+    <!-- 密码是否正确 -->
+	<select id="passwordCorrect" parameterType="map" resultType="int">
+		select count(1)
+		from user o
+		where o.id=#{id} and password= #{oldPassword}
+	</select>
+	
+	<!-- 修改密码 -->
+	<update id="updatePassword" parameterType="map">   
+	    update user
+	    	SET  password= #{newPassword}  
+	    	where id = #{id}  and password=#{oldPassword}  
+	</update>
+	
+	<!-- 用户名是否重复 -->
+	<select id="isRepeatUsername" parameterType="String" resultType="int">
+		 	select count(1)
+			from user o 
+			where o.username=#{username}
+	</select>
+	
+	<select id="queryPage" parameterType="Map" resultType="list" resultMap="userResultMap">
+        select * from user 
+        <trim prefix="where" prefixOverrides="and |or">  
+        	and status != 'DELETED'
+        <if test="username != null">  
+            and username like #{username}  
+        </if>  
+        <if test="nickname != null">  
+            and nickname like #{nickname}  
+        </if>
+        <if test="isvalid != null">  
+            and isvalid = #{isvalid}  
+        </if>  
+        </trim>  
+        order by create_time desc
+    </select>
+    <select id="getTotal" parameterType="Map" resultType="Integer">
+        select count(*) from user 
+        <trim prefix="where" prefixOverrides="and |or">  
+        	and status != 'DELETED'
+        <if test="username != null">  
+            and username like #{username}  
+        </if>  
+        <if test="nickname != null">  
+            and nickname like #{nickname}  
+        </if>
+        <if test="isvalid != null">  
+            and isvalid = #{isvalid}  
+        </if>  
+        </trim>  
+    </select>
+    <!-- 启用/禁用 -->
+	<update id="runUser" parameterType="map">
+		update user set ISVALID=#{isvalid} where ID=#{id}
+	</update>
+	
+	<!-- 删除 -->
+	<update id="deleteUser" parameterType="map">   
+	    update user
+	    	SET  STATUS= #{status}  
+	    	where id = #{id}    
+	</update>
+</mapper>

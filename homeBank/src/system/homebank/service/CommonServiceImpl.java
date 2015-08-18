@@ -9,6 +9,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.Model;
 
 import system.homebank.dao.CommonDao;
@@ -38,11 +39,13 @@ public class CommonServiceImpl implements CommonService
     return this.dao.getDatadictCataList(catalog);
   }
   @Override
+  @Transactional
   public void addDatadictData(DataDict model)
   {
     this.dao.addDatadictData(model);
   }
   @Override
+  @Transactional
   public void delDatadictData(String id)
   {
     this.dao.delDatadictData(id);
@@ -54,6 +57,7 @@ public class CommonServiceImpl implements CommonService
     return this.dao.getDatadictDataById(id);
   }
   @Override
+  @Transactional
   public void updateDatadictData(DataDict model)
   {
     this.dao.updateDatadictData(model);

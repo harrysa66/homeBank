@@ -53,7 +53,7 @@ public class MenuUtils
   private static String createHtml(List<TreeNode> list)
   {
     String result = "";
-    String menu = "<div title=\"%s\" iconCls=\"icon-ok\"  style=\"padding:10px;\"><ul class=\"easyui-tree\" data-options='data:%s'></ul></div>";
+    String menu = "<div title=\"%s\" iconCls=\"icon-menu\"  style=\"padding:10px;\"><ul class=\"easyui-tree\" data-options='data:%s'></ul></div>";
     for (TreeNode o : list)
     {
       result = result + String.format(menu, new Object[] { o.getText(), JSONBinder.buildNormalBinder().toJson(o.getChildren()) });

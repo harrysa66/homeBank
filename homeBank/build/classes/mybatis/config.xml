@@ -17,6 +17,7 @@
         <typeAlias type="system.homebank.entity.DataDict" alias="DataDict" />
         <typeAlias type="system.homebank.entity.Payments" alias="Payments" />
         <typeAlias type="system.homebank.entity.Buget" alias="Buget" />
+        <typeAlias type="system.homebank.entity.User" alias="User" />
     </typeAliases>
     <plugins>  
        <plugin interceptor="system.homebank.interceptor.PageInterceptor">  

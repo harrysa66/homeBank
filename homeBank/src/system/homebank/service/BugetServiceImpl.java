@@ -7,6 +7,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import system.homebank.dao.BugetDao;
 import system.homebank.entity.Buget;
@@ -53,6 +54,7 @@ public class BugetServiceImpl implements BugetService
   }
 
   @Override
+  @Transactional
   public void addBuget(Buget model)
   {
     this.dao.addBuget(model);
@@ -60,6 +62,7 @@ public class BugetServiceImpl implements BugetService
   }
 
   @Override
+  @Transactional
   public void deleteBuget(String id)
   {
     this.dao.deleteBuget(id);
@@ -72,6 +75,7 @@ public Buget getBugetById(String id) {
 }
 
 @Override
+@Transactional
 public void updateBuget(Buget model) {
 	this.dao.updateBuget(model);
 }

@@ -1,6 +1,5 @@
 package system.homebank.service;
 
-import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
@@ -9,6 +8,7 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import system.homebank.dao.PaymentsDao;
 import system.homebank.entity.Payments;
@@ -46,6 +46,7 @@ public class PaymentsServiceImpl implements PaymentsService
   }
 
   @Override
+  @Transactional
   public void addPayments(Payments model)
   {
     model.setCrttime(new Date());
@@ -55,6 +56,7 @@ public class PaymentsServiceImpl implements PaymentsService
   }
 
   @Override
+  @Transactional
   public void delPayments(String id)
   {
     this.dao.delPayments(id);
@@ -68,6 +70,7 @@ public class PaymentsServiceImpl implements PaymentsService
   }
 
   @Override
+  @Transactional
   public void updatePayments(Payments model)
   {
     model.setCrttime(new Date());
