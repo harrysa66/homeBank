@@ -8,6 +8,15 @@
 %>
 
 <script>
+$.extend($.fn.validatebox.defaults.rules, {
+	month:{
+		validator : function(value) {
+			var reg = /^\d{4}\-\d{2}$/;
+			return reg.test(value);
+		},
+		message:'请输入正确年月格式：2015-08'
+	}
+})
 $(function(){
 	
 });
@@ -25,13 +34,14 @@ function submit(){
         success : function(data) {
         	var temp = $.parseJSON(data); 
         	if (temp.success) {
-        		$.messager.alert('增加成功',temp.msg,'Info');
+        		$.messager.alert('增加成功',temp.msg,'Info',function(){
+        			$('#window').window('close');
+                	$('#datagrid_buget').datagrid('load');
+        		});
         	}
         	else{
-        		$.messager.alert('添加失败',temp.msg,'Info');
+        		$.messager.alert('添加失败',temp.msg,'error');
         	}
-        	$('#window').window('close');
-        	$('#datagrid_buget').datagrid('load');
         }
     });
 }
@@ -49,7 +59,7 @@ function cancel() {
                 </td>
                 <td>
                 <input class="easyui-validatebox" id = "month" name="month" 
-		        style="width: 190px;" data-options="required:true" />
+		        style="width: 190px;" data-options="required:true,validType:'month'" />
                 </td>
             </tr>
             <tr>

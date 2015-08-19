@@ -15,4 +15,5 @@ public interface BugetDao
   public void deleteBuget(String id);
 public Buget getBugetById(String id);
 public void updateBuget(Buget model);
+public Buget repeatMonth(Buget model);
 }

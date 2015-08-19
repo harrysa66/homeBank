@@ -18,4 +18,6 @@ public interface BugetService
 public Buget getBugetById(String id);
 
 public void updateBuget(Buget model);
+
+public Buget repeatMonth(Buget model);
 }

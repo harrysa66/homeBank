@@ -97,7 +97,7 @@ function cancel() {
                         var y = date.getFullYear();
                         var m = date.getMonth()+1;
                         m = m < 10?('0'+m):m;
-                        var month = y+''+m;
+                        var month = y+'-'+m;
 				        $.ajax({
 					        type: 'POST',   
 					        url: '<%=basePath%>/bugetController/getBuget.do?month='+month,

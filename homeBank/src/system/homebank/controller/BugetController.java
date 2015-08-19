@@ -49,11 +49,17 @@ public class BugetController
   @ResponseBody
   public Object addBuget(Buget model)
   {
-    this.service.addBuget(model);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
-    map.put("msg", "添加成功！");
-    return map;
+	  Map<String,Object> map = new HashMap<String,Object>();
+	  Buget buget = this.service.repeatMonth(model);
+	  if(buget == null){
+		  this.service.addBuget(model);
+		  map.put("success", true);
+		  map.put("msg", "添加成功！");
+	  }else{
+		  map.put("success", false);
+		  map.put("msg", "该月已设置预算！");
+	  }
+	  return map;
   }
   @RequestMapping("/preUpdateBuget.do")
   public Object preUpdateBuget(@RequestParam String id,Model model)
@@ -66,19 +72,25 @@ public class BugetController
   @ResponseBody
   public Object updateBuget(Buget model)
   {
-    this.service.updateBuget(model);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
-    map.put("msg", "修改成功！");
-    return map;
+	  Map<String,Object> map = new HashMap<String,Object>();
+	  Buget buget = this.service.repeatMonth(model);
+	  if(buget == null){
+		  this.service.updateBuget(model);
+		  map.put("success", true);
+		  map.put("msg", "修改成功！");
+	  }else{
+		  map.put("success", false);
+		  map.put("msg", "该月已设置预算！");
+	  }
+	  return map;
   }
   @RequestMapping("/deleteBuget.do")
   @ResponseBody
   public Object deleteBuget(@RequestParam String id)
   {
     this.service.deleteBuget(id);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("success", true);
     map.put("msg", "删除成功！");
     return map;
   }

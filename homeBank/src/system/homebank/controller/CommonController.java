@@ -39,8 +39,8 @@ public class CommonController
   public Object addDatadictData(DataDict model)
   {
     this.service.addDatadictData(model);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("success", true);
     map.put("msg", "添加成功！");
     return map;
   }
@@ -49,8 +49,8 @@ public class CommonController
   public Object delDatadictData(@RequestParam String id)
   {
     this.service.delDatadictData(id);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("success", true);
     map.put("msg", "删除成功！");
     return map;
   }
@@ -66,8 +66,8 @@ public class CommonController
   public Object updateDatadictData(DataDict model)
   {
     this.service.updateDatadictData(model);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("success", true);
     map.put("msg", "修改成功！");
     return map;
   }

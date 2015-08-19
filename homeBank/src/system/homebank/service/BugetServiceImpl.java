@@ -11,7 +11,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import system.homebank.dao.BugetDao;
 import system.homebank.entity.Buget;
-import system.homebank.entity.Payments;
 import system.homebank.model.Page;
 
 @Service
@@ -78,5 +77,10 @@ public Buget getBugetById(String id) {
 @Transactional
 public void updateBuget(Buget model) {
 	this.dao.updateBuget(model);
+}
+
+@Override
+public Buget repeatMonth(Buget model) {
+	return this.dao.repeatMonth(model);
 }
 }

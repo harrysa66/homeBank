@@ -21,5 +21,7 @@ public interface BugetMapper extends BaseMapper
 
 public Buget getBugetById(String id);
 
-public void updateBuget(Buget model); 
+public void updateBuget(Buget model);
+
+public Buget repeatMonth(Buget model); 
 }

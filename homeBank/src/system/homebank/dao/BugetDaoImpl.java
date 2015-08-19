@@ -59,4 +59,9 @@ public Buget getBugetById(String id) {
 public void updateBuget(Buget model) {
 	this.mapper.updateBuget(model);
 }
+
+@Override
+public Buget repeatMonth(Buget model) {
+	return this.mapper.repeatMonth(model);
+}
 }

@@ -43,4 +43,11 @@
     <select id="getBugetById" parameterType="String" resultType="Buget">
         select * from buget where id = #{id}
     </select>
+    
+    <select id="repeatMonth" parameterType="Buget" resultType="Buget">
+        select * from buget where month = #{month}
+        <if test="id !=null and id != ''"> 
+            	and id!=#{id}
+            </if> 
+    </select>
 </mapper>

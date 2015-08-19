@@ -33,8 +33,8 @@ public class PaymentsController
   public Object addPayments(Payments model)
   {
     this.service.addPayments(model);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("success", true);
     map.put("msg", "添加成功！");
     return map;
   }
@@ -43,8 +43,8 @@ public class PaymentsController
   public Object deletePayments(@RequestParam String id)
   {
     this.service.delPayments(id);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("success", true);
     map.put("msg", "删除成功！");
     return map;
   }
@@ -63,8 +63,8 @@ public class PaymentsController
   public Object updatePayments(Payments model)
   {
     this.service.updatePayments(model);
-    Map<String,String> map = new HashMap<String,String>();
-    map.put("success", "true");
+    Map<String,Object> map = new HashMap<String,Object>();
+    map.put("success", true);
     map.put("msg", "修改成功！");
     return map;
   }
