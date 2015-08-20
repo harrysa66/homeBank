@@ -1,5 +1,8 @@
 package system.security;
 
+import java.io.IOException;
+
+import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
@@ -9,9 +12,14 @@ import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 
 import system.exception.ValidateCodeException;
+import system.homebank.service.UserLoginService;
 
 public class UsernamePasswordAuthenticationExtendFilter extends
 		UsernamePasswordAuthenticationFilter {
+	
+	@Resource
+	private UserLoginService userLoginService;
+	
 	private String validateCodeParameter = "vercode";
 	private String checkCodeParameter = "checkCode";
 	private boolean openValidateCode = false;
@@ -30,7 +38,14 @@ public class UsernamePasswordAuthenticationExtendFilter extends
 
 		setDetails(request, authRequest);
 
-		return getAuthenticationManager().authenticate(authRequest);
+		Authentication authentication = getAuthenticationManager().authenticate(authRequest);
+		request.getSession().setAttribute("isLogin", true);
+		try {
+			userLoginService.insertLogin(username,request);
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return authentication;
 	}
 
 	public void checkValidateCode(HttpServletRequest request) {

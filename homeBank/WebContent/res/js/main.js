@@ -64,6 +64,11 @@ $(function(){
 					} 
                  }
             },
+            {field:'loginCount',title:'登录次数',width:80,sortable:true},
+			{field:'viewLogin',title:'登录情况',width:120,align:'center',formatter:function(value,row,index){
+				var html ="<a href='#' onclick='viewLogin(\""+row.username+"\")'>查看</a>";
+				return html;
+			}},
             {field:'isvalid',title:'状态',width:80,align:'center',sortable:true,styler:function(value,row,index){
 								if(value == 'N'){
 								  return 'color:red;';  
@@ -156,6 +161,14 @@ $(function(){
     });
 		$('#user-info-win').dialog('open');
 	});
+	
+	
+	//查看登录情况
+			var loginSearchForm = $('#loginSearchForm');
+			loginSearchForm.find("#btn-search").click(function(callback){
+				var param = loginSearchForm.serializeObject();
+				$('#login-list').datagrid('load',param);
+			});
 })
 
 function modifyPwd(){
@@ -204,3 +217,41 @@ function addInfo(){
 				});
 			 }
 		}
+		
+function viewLogin(username){
+	$('#beginLogin').datebox('setValue', '');
+				$('#endLogin').datebox('setValue', '');
+				$('#loginSearchForm').form().resetForm();
+				var param = $('#loginSearchForm').serializeObject();
+				$('#login-list').datagrid({   
+				title: '登录列表',
+    			url:'viewLogin.do?username='+username,   
+   				iconCls:'icon-data',    
+   				queryParams : param,
+    			rownumbers:true,
+    			singleSelect:true,
+    			striped:true,
+    			nowrap: true,
+				autoRowHeight: false,
+				height:400,
+				collapsible:true,
+				remoteSort: false,
+				pagination:true,
+				method: 'post',
+				loadMsg: 'Loading in ...',
+				idField: 'id',
+    			columns:[[    
+					{field:'loginTime',title:'登录时间',width:150,sortable:true,
+						formatter:function(value,row,index){  
+							if(value != null && value != ''){
+								var unixTimestamp = new Date(value);  
+                         		return unixTimestamp.toLocaleString();
+							}
+                         }
+                    },
+					{field:'ip',title:'登录IP',width:100,sortable:true},  
+					{field:'ipAddress',title:'登录地址',width:200,sortable:true}  
+    			]]    
+			});  
+			$('#loginList-win').window('open');
+}

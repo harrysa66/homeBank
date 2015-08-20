@@ -101,20 +101,23 @@
 	</select>
 	
 	<select id="queryPage" parameterType="Map" resultType="list" resultMap="userResultMap">
-        select * from user 
+        select o.* ,COUNT(ul.username) as loginCount 
+        from user o
+        LEFT JOIN user_login ul on o.username = ul.username 
         <trim prefix="where" prefixOverrides="and |or">  
-        	and status != 'DELETED'
+        	and o.status != 'DELETED'
         <if test="username != null">  
-            and username like #{username}  
+            and o.username like #{username}  
         </if>  
         <if test="nickname != null">  
-            and nickname like #{nickname}  
+            and o.nickname like #{nickname}  
         </if>
         <if test="isvalid != null">  
-            and isvalid = #{isvalid}  
+            and o.isvalid = #{isvalid}  
         </if>  
         </trim>  
-        order by create_time desc
+        GROUP BY o.username
+        order by o.create_time desc
     </select>
     <select id="getTotal" parameterType="Map" resultType="Integer">
         select count(*) from user 

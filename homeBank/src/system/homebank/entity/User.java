@@ -24,6 +24,7 @@ public class User implements UserDetails {
 	boolean accountNonExpired = true;
 	boolean credentialsNonExpired = true;
 	boolean accountNonLocked = true;
+	private String loginCount;
 
 	private Collection<GrantedAuthority> authorities = new HashSet<GrantedAuthority>();
 	private Map<String, Object> extend = new HashMap<String, Object>();
@@ -222,5 +223,13 @@ public class User implements UserDetails {
 
 	public void setExtend(Map<String, Object> extend) {
 		this.extend = extend;
+	}
+
+	public String getLoginCount() {
+		return loginCount;
+	}
+
+	public void setLoginCount(String loginCount) {
+		this.loginCount = loginCount;
 	}
 }

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="system.homebank.mapper.UserLoginMapper" >
+<sql id="sqlList" >
+    	o.id, o.username, o.login_time, o.ip, o.ip_address
+  	</sql>
+<resultMap id="userLoginResultMap" type="UserLogin" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="username" property="username" jdbcType="VARCHAR" />
+    <result column="login_time" property="loginTime" jdbcType="TIMESTAMP" />
+    <result column="ip" property="ip" jdbcType="VARCHAR" />
+    <result column="ip_address" property="ipAddress" jdbcType="VARCHAR" />
+  </resultMap>
+
+	<!-- 用户插入 -->
+	<insert id="insert" parameterType="UserLogin">
+		insert into user_login (id, username, login_time, 
+      ip, ip_address)
+    values (#{id,jdbcType=VARCHAR}, #{username,jdbcType=VARCHAR}, #{loginTime,jdbcType=TIMESTAMP}, 
+      #{ip,jdbcType=VARCHAR}, #{ipAddress,jdbcType=VARCHAR})
+	</insert>
+	
+	<select id="queryPage" parameterType="Map" resultType="list" resultMap="userLoginResultMap">
+        select distinct <include refid="sqlList" />
+		FROM user_login o
+		WHERE 1=1
+			<if test="username !=null and username != ''"> 
+              and  o.username = #{username}
+            </if>
+            <if test="ip !=null and ip != ''"> 
+              and  o.ip like '%${ip}%'
+            </if>
+            <if test="ipAddress !=null and ipAddress != ''"> 
+              and  o.ip_address like '%${ipAddress}%'
+            </if>
+            <if test="beginLogin !=null and beginLogin != ''"> 
+              <![CDATA[ and  o.login_time >= #{beginLogin} ]]>
+            </if>
+            <if test="endLogin !=null and endLogin != ''"> 
+              <![CDATA[ and  o.login_time <= #{endLogin} ]]>
+            </if>
+            order by o.login_time desc
+    </select>
+    <select id="getTotal" parameterType="Map" resultType="Integer">
+        select count(1)
+		FROM user_login o
+		WHERE 1=1
+			<if test="username !=null and username != ''"> 
+              and  o.username = #{username}
+            </if>
+            <if test="ip !=null and ip != ''"> 
+              and  o.ip like '%${ip}%'
+            </if>
+            <if test="ipAddress !=null and ipAddress != ''"> 
+              and  o.ip_address like '%${ipAddress}%'
+            </if>
+            <if test="beginLogin !=null and beginLogin != ''"> 
+              <![CDATA[ and  o.login_time >= #{beginLogin} ]]>
+            </if>
+            <if test="endLogin !=null and endLogin != ''"> 
+              <![CDATA[ and  o.login_time <= #{endLogin} ]]>
+            </if>
+    </select>
+   
+</mapper>

@@ -18,6 +18,7 @@
         <typeAlias type="system.homebank.entity.Payments" alias="Payments" />
         <typeAlias type="system.homebank.entity.Buget" alias="Buget" />
         <typeAlias type="system.homebank.entity.User" alias="User" />
+        <typeAlias type="system.homebank.entity.UserLogin" alias="UserLogin" />
     </typeAliases>
     <plugins>  
        <plugin interceptor="system.homebank.interceptor.PageInterceptor">  

@@ -164,9 +164,31 @@ $(function(){
 	<!-- add info end  -->
 	
 	<!--  user info start -->
-	<div id="user-info-win"  class="easyui-window" title="用户信息列表" data-options="closed:true,modal:true" style="width:610px;height:550px;">
+	<div id="user-info-win"  class="easyui-window" title="用户信息列表" data-options="closed:true,modal:true" style="width:810px;height:550px;">
 		<table id="datagrid_user"></table>
 	</div>
 	<!-- user info end  -->
+	
+	<!-- 查看登录情况 -->
+  	 <div id="loginList-win" class="easyui-dialog" title="登录情况" data-options="closed:true,modal:true,top:0" style="width:900px;height:600px;"> 
+  	 	<div class="easyui-panel ui-search-panel" title="查询项" data-options="striped: true,collapsible:true,iconCls:'icon-searchfile'">  
+ 	 <form id="loginSearchForm">
+ 	 	<p class="ui-fields">
+ 	 		<label class="ui-label">登录开始时间:</label> 
+            <input id="beginLogin" class="easyui-datebox" name="beginLogin" data-options="editable:false"> 
+            <label class="ui-label">登录结束时间:</label> 
+            <input id="endLogin" class="easyui-datebox" name="endLogin" data-options="editable:false">
+            <label class="ui-label">登录IP:</label> 
+            <input name="ip" class="easyui-box ui-text" style="width:100px;">
+            <label class="ui-label">登录地址:</label> 
+            <input name="ipAddress" class="easyui-box ui-text" style="width:100px;">
+        </p>  
+        <a href="#" id="btn-search" class="easyui-linkbutton" iconCls="icon-search">查询</a>
+      </form>  
+     </div>
+  	 	<form id="loginListForm" method="post">
+     		<table id="login-list"></table>
+	 	</form>
+  	 </div>
 </body>
 </html>

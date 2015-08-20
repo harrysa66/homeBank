@@ -130,6 +130,23 @@ CREATE TABLE `user` (
 INSERT INTO `user` VALUES ('6f60af2d074141ccb4e835906fdefe66', 'admin', '4392c4f26c8de6034f758c61331d6e60', '超级管理员', '2015-07-27 14:08:12', null, 'DEFAULT', 'Y');
 
 -- ----------------------------
+-- Table structure for user_login
+-- ----------------------------
+DROP TABLE IF EXISTS `user_login`;
+CREATE TABLE `user_login` (
+  `id` varchar(32) NOT NULL,
+  `username` varchar(50) DEFAULT NULL,
+  `login_time` datetime DEFAULT NULL,
+  `ip` varchar(15) DEFAULT NULL,
+  `ip_address` varchar(50) DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+-- ----------------------------
+-- Records of user_login
+-- ----------------------------
+
+-- ----------------------------
 -- View structure for vbuget
 -- ----------------------------
 DROP VIEW IF EXISTS `vbuget`;

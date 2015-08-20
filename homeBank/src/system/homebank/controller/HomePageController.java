@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import system.homebank.entity.Menu;
 import system.homebank.entity.User;
 import system.homebank.service.CommonService;
+import system.homebank.service.UserLoginService;
 import system.homebank.service.UserService;
 import system.homebank.utils.HtmlUtil;
 import system.homebank.utils.IPUtil;
@@ -41,10 +42,22 @@ public class HomePageController
   @Resource
   private UserService userService;
   
+  @Resource
+  private UserLoginService userLoginService;
+  
   @RequestMapping("/login.do")
-  public String login()
+  public String login(HttpServletRequest request)
   {
-    return "/login";
+	  boolean isLogin = false;
+		Object loginObject = request.getSession().getAttribute("isLogin");
+		if(loginObject != null){
+			isLogin = (boolean) loginObject;
+		}
+		if(isLogin){
+			return "redirect:/home.do";
+		}else{
+			return "/login";
+		}
   }
   
   @RequestMapping("/home.do")
@@ -53,7 +66,7 @@ public class HomePageController
     List<Menu> list = this.commonService.getAllMenu();
     String menus = MenuUtils.buildMenus(list);
     User user = SpringSecurityUtils.getCurrentUser();
-    String userIp = IPUtil.getIpAddr(request);
+    String userIp = IPUtil.getIp(request);
     model.addAttribute("user", user);
     model.addAttribute("userIp", userIp);
     model.addAttribute("menus", menus);
@@ -112,6 +125,13 @@ public class HomePageController
     {
   		Map<String, Object> result = userService.deleteUser(id);
   		HtmlUtil.writerJson(response, result);
+    }
+  	
+  	@RequestMapping("/viewLogin.do")
+    @ResponseBody
+    public Object viewLogin(@RequestParam Map<String,Object> filter)
+    {
+      return userLoginService.query(filter);
     }
   
   @RequestMapping("/payincome.do")
